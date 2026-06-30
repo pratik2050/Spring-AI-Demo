@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: SpringAI-Demo
+  ai:
+    openai:
+      api-key: ${OPEN_AI_KEY}
+    bedrock:
+      aws:
+        region: us-east-1
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      converse:
+        chat:
+          options:
+            model: ${BEDROCK_MODEL_ARN}
+
+
+logging:
+  level:
+    org.springframework.ai: DEBUG
+    org.springframework.boot.context.properties: TRACE
+  pattern:
+    console: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
