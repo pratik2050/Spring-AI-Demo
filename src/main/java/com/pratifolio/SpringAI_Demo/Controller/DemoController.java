@@ -20,9 +20,9 @@ public class DemoController {
         return demoService.askOpenAI(msg);
     }
 
-    @GetMapping("askBedrock/{msg}")
-    public ResponseEntity<?> askBedrock(@PathVariable String msg) {
-        return demoService.askBedrock(msg);
+    @GetMapping("askAnthropic/{msg}")
+    public ResponseEntity<?> askGemini(@PathVariable String msg) {
+        return demoService.askAnthropic(msg);
     }
 
 }

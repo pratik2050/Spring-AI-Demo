@@ -1,6 +1,7 @@
 package com.pratifolio.SpringAI_Demo.Service;
 
 
+import org.springframework.ai.anthropic.AnthropicChatOptions;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,14 @@ import org.springframework.stereotype.Service;
 public class DemoService {
 
     private final ChatClient openAIChatClient;
-    private final ChatClient bedrockChatClient;
+    private final ChatClient anthropicChatClient;
 
     public DemoService(
             @Qualifier("openAIChatClient") ChatClient openAIChatClient,
-            @Qualifier("bedrockChatClient") ChatClient bedrockChatClient
+            @Qualifier("anthropicChatClient") ChatClient anthropicChatClient
     ) {
         this.openAIChatClient = openAIChatClient;
-        this.bedrockChatClient = bedrockChatClient;
+        this.anthropicChatClient = anthropicChatClient;
     }
 
 
@@ -29,9 +30,9 @@ public class DemoService {
         );
     }
 
-    public ResponseEntity<?> askBedrock(String msg) {
+    public ResponseEntity<?> askAnthropic(String msg) {
         return new ResponseEntity<>(
-                bedrockChatClient.prompt(msg).call().content(),
+                anthropicChatClient.prompt(msg).call().content(),
                 HttpStatus.OK
         );
     }

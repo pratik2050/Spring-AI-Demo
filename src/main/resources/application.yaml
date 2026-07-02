@@ -4,20 +4,13 @@ spring:
   ai:
     openai:
       api-key: ${OPEN_AI_KEY}
-    bedrock:
-      aws:
-        region: us-east-1
-        access-key: ${AWS_ACCESS_KEY}
-        secret-key: ${AWS_SECRET_KEY}
-      converse:
-        chat:
-          options:
-            model: ${BEDROCK_MODEL_ARN}
-
+      chat:
+        model: gpt-4o-mini
+    anthropic:
+      api-key: ${ANTHROPIC_KEY}
+      chat:
+        model: claude-haiku-4-5
 
 logging:
-  level:
-    org.springframework.ai: DEBUG
-    org.springframework.boot.context.properties: TRACE
   pattern:
     console: "%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
