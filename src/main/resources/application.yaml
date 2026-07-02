@@ -5,11 +5,13 @@ spring:
     openai:
       api-key: ${OPEN_AI_KEY}
       chat:
-        model: gpt-4o-mini
+        options:
+          model: gpt-4o-mini
     anthropic:
       api-key: ${ANTHROPIC_KEY}
       chat:
-        model: claude-haiku-4-5
+        options:
+          model: claude-haiku-4-5
 
 logging:
   pattern:
