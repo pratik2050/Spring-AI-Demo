@@ -1,7 +1,6 @@
 package com.pratifolio.SpringAI_Demo.Service;
 
 
-import org.springframework.ai.anthropic.AnthropicChatOptions;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DemoService {
+public class MasterService {
 
     private final ChatClient openAIChatClient;
     private final ChatClient anthropicChatClient;
@@ -21,10 +20,13 @@ public class DemoService {
             to improve the productivity of the customer support team
                           """;
 
-    @Value("classpath:/promptTemplates/customerEmailTemplate.st")
+    @Value("classpath:/promptTemplates/CustomerEmailTemplate.st")
     private Resource customerEmailTemplate;
 
-    public DemoService(
+    @Value("classpath:/promptTemplates/SystemPromptTemplate.st")
+    private Resource systemPromptTemplate;
+
+    public MasterService(
             @Qualifier("openAIChatClient") ChatClient openAIChatClient,
             @Qualifier("anthropicChatClient") ChatClient anthropicChatClient
     ) {
@@ -58,5 +60,14 @@ public class DemoService {
                                   .param("customerMessage", customerMessage)
                           )
                   .call().content(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getStuffedResponse(String customerMessage) {
+        return new ResponseEntity<>(
+                anthropicChatClient
+                        .prompt()
+                        .system(systemPromptTemplate)
+                        .user(customerMessage)
+                        .call().content(), HttpStatus.OK);
     }
 }

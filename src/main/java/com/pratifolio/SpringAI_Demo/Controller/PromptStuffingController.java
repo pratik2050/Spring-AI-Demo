@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class PromptTemplateController {
+public class PromptStuffingController {
 
     @Autowired
     private MasterService demoService;
 
-    @GetMapping("email")
-    public ResponseEntity<?> getEmailChat(@RequestParam String customerName, @RequestParam String customerMessage) {
-        return demoService.getEmailChat(customerName, customerMessage);
+    @GetMapping("prompt-stuffing")
+    public ResponseEntity<?> getStuffedResponse(@RequestParam String customerMessage) {
+        return demoService.getStuffedResponse(customerMessage);
     }
 
 }
