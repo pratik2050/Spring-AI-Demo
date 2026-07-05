@@ -1,7 +1,9 @@
 package com.pratifolio.SpringAI_Demo.Service;
 
 
+import com.pratifolio.SpringAI_Demo.Advisors.TokenUsageAuditAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -37,7 +39,11 @@ public class MasterService {
 
     public ResponseEntity<?> askOpenAI(String msg) {
         return new ResponseEntity<>(
-                openAIChatClient.prompt(msg).call().content(),
+                openAIChatClient
+                        .prompt(msg)
+                        .advisors(new SimpleLoggerAdvisor())
+                        .call()
+                        .content(),
                 HttpStatus.OK
         );
     }

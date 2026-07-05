@@ -1,6 +1,7 @@
 package com.pratifolio.SpringAI_Demo.Config;
 
 
+import com.pratifolio.SpringAI_Demo.Advisors.TokenUsageAuditAdvisor;
 import org.springframework.ai.anthropic.AnthropicChatModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatModel;
@@ -12,7 +13,9 @@ public class ModelConfig {
 
     @Bean
     public ChatClient openAIChatClient(OpenAiChatModel openAiChatModel) {
-        return ChatClient.builder(openAiChatModel).build();
+        return ChatClient.builder(openAiChatModel)
+                .defaultAdvisors(new TokenUsageAuditAdvisor())
+                .build();
     }
 
     @Bean
