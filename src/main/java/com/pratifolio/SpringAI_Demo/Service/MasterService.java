@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 public class MasterService {
@@ -75,5 +76,19 @@ public class MasterService {
                         .system(systemPromptTemplate)
                         .user(customerMessage)
                         .call().content(), HttpStatus.OK);
+    }
+
+    public Flux<String> streamOpenAI(String msg) {
+        return openAIChatClient
+                .prompt(msg)
+                .stream()
+                .content();
+    }
+
+    public Flux<String> streamAnthropic(String msg) {
+        return anthropicChatClient
+                .prompt(msg)
+                .stream()
+                .content();
     }
 }
