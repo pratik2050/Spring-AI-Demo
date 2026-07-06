@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class StreamAndStructuredController {
@@ -26,5 +28,14 @@ public class StreamAndStructuredController {
         return demoService.streamAnthropic(msg);
     }
 
+    @GetMapping("structured/{msg}")
+    public ResponseEntity<?> getPOJO(@PathVariable String msg) {
+        return demoService.getPOJO(msg);
+    }
+
+    @GetMapping("structured-list/{msg}")
+    public ResponseEntity<List<?>> getPOJOList(@PathVariable String msg) {
+        return demoService.getPOJOList(msg);
+    }
 
 }
