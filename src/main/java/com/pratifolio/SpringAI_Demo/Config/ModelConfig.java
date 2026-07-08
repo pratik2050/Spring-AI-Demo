@@ -23,13 +23,13 @@ public class ModelConfig {
 
     @Bean
     public ChatClient anthropicChatClient(AnthropicChatModel anthropicChatModel) {
-//        var options = AnthropicChatOptions.builder()
-//                .temperature(0.9)
-//                .maxTokens(100)
-//                .build();
+        var options = AnthropicChatOptions.builder()
+                .temperature(0.9)
+                .maxTokens(100)
+                .build();
 
         return ChatClient.builder(anthropicChatModel)
-//                .defaultOptions(options)
+                .defaultOptions(options)
                 .defaultAdvisors(new SimpleLoggerAdvisor())
                 .build();
     }

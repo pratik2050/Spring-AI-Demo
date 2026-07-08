@@ -1,6 +1,6 @@
 package com.pratifolio.SpringAI_Demo.Controller;
 
-import com.pratifolio.SpringAI_Demo.Service.MasterService;
+import com.pratifolio.SpringAI_Demo.Service.MasterService_v1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     @Autowired
-    private MasterService demoService;
+    private MasterService_v1 demoService;
 
     @GetMapping("askOpenAI/{msg}")
     public ResponseEntity<?> askOpenAI(@PathVariable String msg) {
