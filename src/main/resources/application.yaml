@@ -1,6 +1,11 @@
 spring:
   application:
     name: SpringAI-Demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/chatdb1
+    username: pratik
+    password: pratik2001
+    driver-class-name: com.mysql.jdbc.Driver
   ai:
     openai:
       api-key: ${OPEN_AI_KEY}
@@ -12,6 +17,12 @@ spring:
       chat:
         options:
           model: claude-haiku-4-5
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+
 
 logging:
   level:
