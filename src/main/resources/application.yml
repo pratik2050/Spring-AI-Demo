@@ -6,6 +6,10 @@ spring:
     username: pratik
     password: pratik2001
     driver-class-name: com.mysql.jdbc.Driver
+  docker:
+    compose:
+      stop:
+        command: down
   ai:
     openai:
       api-key: ${OPEN_AI_KEY}
@@ -22,6 +26,12 @@ spring:
         repository:
           jdbc:
             initialize-schema: always
+    vectorstore:
+      qdrant:
+        initialize-schema: true
+        host: localhost
+        port: 6334
+        collection-name: vecChatDB1
 
 
 logging:
