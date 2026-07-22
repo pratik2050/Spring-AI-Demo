@@ -29,6 +29,9 @@ public class RAGService_v1 {
     @Value("classpath:/promptTemplates/SystemPromptRandomDataTemplate.st")
     private Resource systemPromptRandomDataTemplate;
 
+    @Value("classpath:/promptTemplates/RAGHRSystemPrompt.st")
+    private Resource RAGHRSystemPrompt;
+
     public ResponseEntity<?> randomOpenAIChat(String username, String message) {
         SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
 
@@ -42,6 +45,28 @@ public class RAGService_v1 {
         String answer = OpenAIChatClient.prompt()
                 .system(
                         promptSystemSpec -> promptSystemSpec.text(systemPromptRandomDataTemplate)
+                                .param("documents", similarContext)
+                )
+                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, username))
+                .user(message)
+                .call().content();
+
+        return new ResponseEntity<>(answer, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> randomOpenAIDocsChat(String username, String message) {
+        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
+
+        List<Document> similarDocs = vectorStore.similaritySearch(searchRequest);
+
+        String similarContext = similarDocs
+                .stream()
+                .map(Document::getText)
+                .collect(Collectors.joining(System.lineSeparator()));
+
+        String answer = OpenAIChatClient.prompt()
+                .system(
+                        promptSystemSpec -> promptSystemSpec.text(RAGHRSystemPrompt)
                                 .param("documents", similarContext)
                 )
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, username))

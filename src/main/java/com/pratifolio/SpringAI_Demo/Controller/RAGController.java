@@ -17,4 +17,9 @@ public class RAGController {
         return ragService_v1.randomOpenAIChat(username, message);
     }
 
+    @GetMapping("random/openAIDocsChat")
+    public ResponseEntity<?> randomOpenAIDocsChat(@RequestHeader("username") String username, @RequestParam("message") String message) {
+        return ragService_v1.randomOpenAIDocsChat(username, message);
+    }
+
 }
