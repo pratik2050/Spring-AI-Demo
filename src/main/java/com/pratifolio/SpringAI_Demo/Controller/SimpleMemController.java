@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class ChatMemoryController {
+public class SimpleMemController {
 
     @Autowired
     private SimpleMemService masterService_v2;

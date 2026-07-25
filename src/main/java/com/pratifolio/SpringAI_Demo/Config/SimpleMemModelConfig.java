@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class SimpleMemChanClientConfig {
+public class SimpleMemModelConfig {
 
     @Bean
     public ChatClient openAIMemoryChatClient(OpenAiChatModel openAiChatModel, ChatMemory chatMemory) {
