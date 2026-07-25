@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MasterService_v2 {
+public class SimpleMemService {
 
     private final ChatClient openAiMemoryChatClient;
 
-    public MasterService_v2(@Qualifier("openAIMemoryChatClient") ChatClient chatClient) {
+    public SimpleMemService(@Qualifier("openAIMemoryChatClient") ChatClient chatClient) {
            this.openAiMemoryChatClient = chatClient;
     }
 

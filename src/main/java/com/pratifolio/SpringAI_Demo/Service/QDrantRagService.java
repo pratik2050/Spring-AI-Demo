@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RAGService_v1 {
+public class QDrantRagService {
 
     private final ChatClient OpenAIChatClient;
     private final VectorStore vectorStore;
 
-    public RAGService_v1(@Qualifier("openAIMemoryChatClient") ChatClient OpenAIChatClient, VectorStore vectorStore) {
+    public QDrantRagService(@Qualifier("openAIMemoryChatClient") ChatClient OpenAIChatClient, VectorStore vectorStore) {
         this.OpenAIChatClient = OpenAIChatClient;
         this.vectorStore = vectorStore;
     }

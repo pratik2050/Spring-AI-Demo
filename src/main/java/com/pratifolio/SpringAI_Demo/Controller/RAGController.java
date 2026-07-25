@@ -1,6 +1,6 @@
 package com.pratifolio.SpringAI_Demo.Controller;
 
-import com.pratifolio.SpringAI_Demo.Service.RAGService_v1;
+import com.pratifolio.SpringAI_Demo.Service.QDrantRagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class RAGController {
 
     @Autowired
-    private RAGService_v1 ragService_v1;
+    private QDrantRagService ragService_v1;
 
     @GetMapping("random/openAIChat")
     public ResponseEntity<?> randomOpenAIChat(@RequestHeader("username") String username, @RequestParam("message") String message) {

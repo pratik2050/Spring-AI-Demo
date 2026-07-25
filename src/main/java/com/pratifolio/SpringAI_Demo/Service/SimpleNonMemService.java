@@ -16,7 +16,7 @@ import reactor.core.publisher.Flux;
 import java.util.List;
 
 @Service
-public class MasterService_v1 {
+public class SimpleNonMemService {
 
     private final ChatClient openAIChatClient;
     private final ChatClient anthropicChatClient;
@@ -32,7 +32,7 @@ public class MasterService_v1 {
     @Value("classpath:/promptTemplates/SystemPromptTemplate.st")
     private Resource systemPromptTemplate;
 
-    public MasterService_v1(
+    public SimpleNonMemService(
             @Qualifier("openAIChatClient") ChatClient openAIChatClient,
             @Qualifier("anthropicChatClient") ChatClient anthropicChatClient
     ) {
