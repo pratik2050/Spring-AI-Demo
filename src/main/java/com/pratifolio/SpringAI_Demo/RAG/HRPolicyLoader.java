@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//@Component
+@Component
 public class HRPolicyLoader {
 
     private final VectorStore vectorStore;
@@ -30,7 +30,7 @@ public class HRPolicyLoader {
         TikaDocumentReader tikaDocumentReader = new TikaDocumentReader(HRPolicy);
         List<Document> documents = tikaDocumentReader.get();
 
-        TextSplitter textSplitter = TokenTextSplitter.builder().withChunkSize(100).withMaxNumChunks(400).build();
+        TextSplitter textSplitter = TokenTextSplitter.builder().withChunkSize(200).withMaxNumChunks(400).build();
 
         vectorStore.add(textSplitter.split(documents));
     }

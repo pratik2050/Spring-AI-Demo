@@ -19,11 +19,14 @@ import java.util.stream.Collectors;
 public class QDrantRagService {
 
     private final ChatClient OpenAIChatClient;
+    private final ChatClient openAIVectorStoreChatClient;
     private final VectorStore vectorStore;
 
-    public QDrantRagService(@Qualifier("openAIMemoryChatClient") ChatClient OpenAIChatClient, VectorStore vectorStore) {
+    public QDrantRagService(@Qualifier("openAIMemoryChatClient") ChatClient OpenAIChatClient, VectorStore vectorStore
+    , @Qualifier("openAIVectorStoreChatClient") ChatClient openAIVectorStoreChatClient) {
         this.OpenAIChatClient = OpenAIChatClient;
         this.vectorStore = vectorStore;
+        this.openAIVectorStoreChatClient = openAIVectorStoreChatClient;
     }
 
     @Value("classpath:/promptTemplates/SystemPromptRandomDataTemplate.st")
@@ -54,21 +57,30 @@ public class QDrantRagService {
         return new ResponseEntity<>(answer, HttpStatus.OK);
     }
 
+//    public ResponseEntity<?> randomOpenAIDocsChat(String username, String message) {
+//        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
+//
+//        List<Document> similarDocs = vectorStore.similaritySearch(searchRequest);
+//
+//        String similarContext = similarDocs
+//                .stream()
+//                .map(Document::getText)
+//                .collect(Collectors.joining(System.lineSeparator()));
+//
+//        String answer = OpenAIChatClient.prompt()
+//                .system(
+//                        promptSystemSpec -> promptSystemSpec.text(RAGHRSystemPrompt)
+//                                .param("documents", similarContext)
+//                )
+//                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, username))
+//                .user(message)
+//                .call().content();
+//
+//        return new ResponseEntity<>(answer, HttpStatus.OK);
+//    }
+
     public ResponseEntity<?> randomOpenAIDocsChat(String username, String message) {
-        SearchRequest searchRequest = SearchRequest.builder().query(message).topK(3).similarityThreshold(0.5).build();
-
-        List<Document> similarDocs = vectorStore.similaritySearch(searchRequest);
-
-        String similarContext = similarDocs
-                .stream()
-                .map(Document::getText)
-                .collect(Collectors.joining(System.lineSeparator()));
-
-        String answer = OpenAIChatClient.prompt()
-                .system(
-                        promptSystemSpec -> promptSystemSpec.text(RAGHRSystemPrompt)
-                                .param("documents", similarContext)
-                )
+        String answer = openAIVectorStoreChatClient.prompt()
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, username))
                 .user(message)
                 .call().content();

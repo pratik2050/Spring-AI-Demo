@@ -9,6 +9,7 @@ import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.preretrieval.query.transformation.TranslationQueryTransformer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
@@ -20,7 +21,7 @@ public class WebSearchRagModelConfig {
 
     @Bean("webSearchRAGChatClient")
     public ChatClient chatClient(OpenAiChatModel openAiChatModel,
-                                 ChatMemory chatMemory, RestClient.Builder restClientBuilder) {
+                                 ChatMemory chatMemory, RestClient.Builder restClientBuilder, ChatClient.Builder builder) {
 
         Advisor loggerAdvisor = new SimpleLoggerAdvisor();
         Advisor tokenUsageAdvisor = new TokenUsageAuditAdvisor();
