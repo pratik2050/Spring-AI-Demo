@@ -1,4 +1,4 @@
-package com.pratifolio.SpringAI_Demo.Service;
+package com.pratifolio.SpringAI_Demo.Service.SimpleAndRAG;
 
 
 import com.pratifolio.SpringAI_Demo.ModelPOJO.CountryCities;

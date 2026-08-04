@@ -1,6 +1,6 @@
-package com.pratifolio.SpringAI_Demo.Controller;
+package com.pratifolio.SpringAI_Demo.Controller.SimpleAndRAG;
 
-import com.pratifolio.SpringAI_Demo.Service.SimpleMemService;
+import com.pratifolio.SpringAI_Demo.Service.SimpleAndRAG.SimpleMemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.pratifolio.SpringAI_Demo.Service;
+package com.pratifolio.SpringAI_Demo.Service.SimpleAndRAG;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;

@@ -1,7 +1,7 @@
-package com.pratifolio.SpringAI_Demo.Controller;
+package com.pratifolio.SpringAI_Demo.Controller.SimpleAndRAG;
 
-import com.pratifolio.SpringAI_Demo.Service.QDrantRagService;
-import com.pratifolio.SpringAI_Demo.Service.WebSearchRagService;
+import com.pratifolio.SpringAI_Demo.Service.SimpleAndRAG.QDrantRagService;
+import com.pratifolio.SpringAI_Demo.Service.SimpleAndRAG.WebSearchRagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
