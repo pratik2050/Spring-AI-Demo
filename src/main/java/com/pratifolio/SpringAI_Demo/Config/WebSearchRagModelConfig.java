@@ -2,6 +2,7 @@ package com.pratifolio.SpringAI_Demo.Config;
 
 import com.pratifolio.SpringAI_Demo.Advisors.TokenUsageAuditAdvisor;
 import com.pratifolio.SpringAI_Demo.RAG.WebSearchDocumentRetriever;
+import org.springframework.ai.chat.cache.semantic.SemanticCacheAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -20,7 +21,7 @@ import java.util.List;
 public class WebSearchRagModelConfig {
 
     @Bean("webSearchRAGChatClient")
-    public ChatClient chatClient(OpenAiChatModel openAiChatModel,
+    public ChatClient chatClient(OpenAiChatModel openAiChatModel, SemanticCacheAdvisor semanticCacheAdvisor,
                                  ChatMemory chatMemory, RestClient.Builder restClientBuilder, ChatClient.Builder builder) {
 
         Advisor loggerAdvisor = new SimpleLoggerAdvisor();
@@ -33,7 +34,7 @@ public class WebSearchRagModelConfig {
 
         return ChatClient.builder(openAiChatModel)
                 .defaultAdvisors(List.of(loggerAdvisor, memoryAdvisor, tokenUsageAdvisor,
-                        webSearchRAGAdvisor))
+                        webSearchRAGAdvisor, semanticCacheAdvisor))
                 .build();
     }
 

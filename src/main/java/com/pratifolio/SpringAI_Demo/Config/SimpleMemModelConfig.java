@@ -1,6 +1,7 @@
 package com.pratifolio.SpringAI_Demo.Config;
 
 import org.springframework.ai.anthropic.AnthropicChatModel;
+import org.springframework.ai.chat.cache.semantic.SemanticCacheAdvisor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -42,12 +43,12 @@ public class SimpleMemModelConfig {
 
     @Bean
     public ChatClient openAIVectorStoreChatClient(OpenAiChatModel openAiChatModel, RetrievalAugmentationAdvisor vectorRagAdvisor,
-                                                  ChatMemory chatMemory) {
+                                                  ChatMemory chatMemory, SemanticCacheAdvisor semanticCacheAdvisor) {
         Advisor memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
         Advisor loggerAdvisor = new SimpleLoggerAdvisor();
 
         return ChatClient.builder(openAiChatModel)
-                .defaultAdvisors(List.of(memoryAdvisor, loggerAdvisor, vectorRagAdvisor))
+                .defaultAdvisors(List.of(memoryAdvisor, loggerAdvisor, vectorRagAdvisor, semanticCacheAdvisor))
                 .build();
     }
 
