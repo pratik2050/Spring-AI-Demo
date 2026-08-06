@@ -6,6 +6,9 @@ spring:
     username: pratik
     password: pratik2001
     driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
   docker:
     compose:
       stop:
